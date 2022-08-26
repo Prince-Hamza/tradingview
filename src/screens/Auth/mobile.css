@@ -1,0 +1,18 @@
+.PrimaryCard {
+    width: 60%
+}
+
+.leftCol {
+    height: '500px'
+}
+
+
+@media screen and (max-width: 700px) {
+    .PrimaryCard {
+        width: 100%;
+    }
+
+    .leftCol {
+        height:200px
+    }
+}
