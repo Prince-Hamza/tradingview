@@ -17,7 +17,7 @@ export class Community {
         var dataList = []
         resp.forEach((group) => {
             var groupData = group.val()
-            var keys = Object.keys(groupData.Posts)
+            var keys = Object.keys(groupData)
             groupData.Posts = keys.map((k) => { return groupData.Posts[k] })
             console.log(`group data :${JSON.stringify(groupData, null, 4)}  \n`)
             dataList.push(groupData)

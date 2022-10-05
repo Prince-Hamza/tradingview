@@ -22,14 +22,16 @@ export default function List() {
 
             var community = new Community(communityJson)
             var groups = await community.getCommunities(communityJson)
+            alert(`${JSON.stringify(groups)}`)
             setGroupList([...groups])
             appData.groups = groups
             appData.selectedGroup = groups[0]
             setAppData({ ...appData })
         }
+        
 
-        if (!groupList.length) getInfo()
-
+         getInfo()
+        
     }, [])
 
 
@@ -39,7 +41,7 @@ export default function List() {
         appData.selectedGroup = item
         setAppData({ ...appData })
         alert(appData.selectedGroup.Posts.length)
-         navigate(`/community/${item.owner}_${item.name}`)
+        navigate(`/community/${item.owner}_${item.name}`)
     }
 
 

@@ -26,6 +26,7 @@ export default function Posts() {
             setPosts([...postsInfo])
         }
 
+        alert(`selected group data : ${JSON.stringify(appData.selectedGroup.Posts)}`)
         setPosts(appData.selectedGroup.Posts)
 
     }, [])

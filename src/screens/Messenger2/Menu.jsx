@@ -4,9 +4,8 @@ import { Content } from '../../styles/styles'
 import Center from '../../components/Center'
 import { useNavigate } from 'react-router-dom'
 
-
 export default function Menu() {
-
+    
     const navigate = useNavigate()
 
     return (

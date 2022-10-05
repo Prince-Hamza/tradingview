@@ -11,6 +11,7 @@ import { useState, useContext } from 'react'
 import Community from './screens/Community/Community'
 import TradingView from './screens/TradingView/TradingView'
 import Messenger from './screens/Messenger2/Messenger'
+import Profile from './screens/Profile/Profile'
 import "bootstrap/dist/css/bootstrap.min.css"
 import './App.css'
 
@@ -25,6 +26,7 @@ function App() {
         <Routes>
           <Route exact path="/" element={<Auth />} />
           <Route exact path="/trading" element={<TradingView />} />
+          <Route exact path="/user/:id" element={<Profile />} />
           <Route exact path="/dashboard" element={<Dashboard />} />
           <Route exact path="/community" element={<Community />} />
           <Route exact path="/community/:id" element={<Timelines />} />

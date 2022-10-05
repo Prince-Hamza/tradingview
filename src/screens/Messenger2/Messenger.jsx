@@ -22,16 +22,6 @@ export default function Messenger({ userInfo1, userInfo2, groupInfo, messengerTy
     const init = () => {
 
 
-        // alert(`path : chats/${JSON.stringify(info)}`)
-
-        // var list = []
-        // firebase.database().ref(`chats/${info.chatKey}`).on('child_added', (resp) => {
-        //     console.log(`new message : ${resp.val()}`)
-        //     list.push(resp.val())
-        //     setMessages([...list])
-        // })
-
-
     }
     const effect = () => { if (chatLinkInfo.chatKey) init() }
     useEffect(effect, [])
@@ -43,11 +33,11 @@ export default function Messenger({ userInfo1, userInfo2, groupInfo, messengerTy
             {!Icon &&
                 <Col lg={12} style={{ ...Styles.messenger, height: window.innerHeight - 15 + 'px' }} onMouseLeave={(e) => { }}>
                     <Menu />
-                    <Row lg={12} >
+                    <Row lg={12} style={{ border: 'dashed 2px red' }}>
                         <Col lg={3} style={Styles.chatHistory} >
                             <ChatHistory setMessages={setMessagesInfo} setChatLinkInfo={setChatLinkInfo} />
                         </Col>
-                        <Col lg={9} style={Styles.chatColumn} >
+                        <Col lg={9} style={Styles.chatColumn} id={'cc'} >
                             <Intro info={messagesInfo} />
                             <PreviousMessages info={messagesInfo} />
                             {chatLinkInfo.chatKey && <ChatNow info={chatLinkInfo} />}
@@ -91,7 +81,8 @@ const Styles = ({
     chatColumn: {
         backgroundColor: '#222',
         padding: '0px',
-        height: window.screen.height - 200 + 'px',
-        position: 'relative'
+        height: '850px',
+        overflow:'auto',
+        border:'dashed 2px blue',
     }
 })

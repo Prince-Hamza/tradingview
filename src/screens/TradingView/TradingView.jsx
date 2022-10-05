@@ -19,8 +19,12 @@ export default function TradingView() {
 
     const init = async () => {
         var userData = await auth.getLoginSession()
-        appData.userInfo = userData.user.providerData[0]
-        setAppData(appData)
+        
+        if (!userData.error) appData.userInfo = userData.user.providerData[0]
+        if (!userData.error) {
+            setAppData({...appData})
+        }
+        if (userData.error) window.location.replace('/')
     }
 
     const effect = () => {
@@ -36,7 +40,7 @@ export default function TradingView() {
 
             <Menubar />
 
-            <Row lg={12} style={Styles.container}>
+            <Col lg={12} style={Styles.container}>
                 <Pairs updatePair={updatePair} />
                 <Col lg={11} style={Styles.TradingView}>
                     <TradingViewWidget
@@ -46,20 +50,20 @@ export default function TradingView() {
                         theme="dark"
                         style="1"
                         locale="en"
-                        toolbar_bg="#f1f3f6"
+                        //toolbar_bg="#f1f3f6"
                         enable_publishing={false}
                         withdateranges={true}
                         range="YTD"
                         hide_side_toolbar={false}
                         allow_symbol_change={true}
-                        details={true}
-                        hotlist={true}
-                        calendar={true}
+                        details={false}
+                        hotlist={false}
+                        calendar={false}
                         container_id="tradingview_74bc0"
                     />
                 </Col>
                 <Overlayer />
-            </Row>
+            </Col>
 
         </Row>
     )

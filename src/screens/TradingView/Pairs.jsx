@@ -8,7 +8,7 @@ export default function Pairs({ updatePair }) {
             <br />
             {pairsList.map((pair) => {
                 return (
-                    <div style={{ marginBottom: '20px', color: 'white', cursor: 'pointer' }} onClick={() => { updatePair(pair) }} >
+                    <div style={{ marginBottom: '20px', marginRight: '20px', color: 'white', cursor: 'pointer' }} onClick={() => { updatePair(pair) }} >
                         {pair}
                     </div>
                 )
@@ -22,8 +22,12 @@ export default function Pairs({ updatePair }) {
 const Styles = ({
     theme: {
         backgroundColor: 'rgb(50,50,50)',
-        height: window.screen.height - 280,
-        overflow: 'auto'
+        width: '90%',
+        height: '100px',
+        overflow: 'auto',
+        display: 'flex',
+        justifyContet: 'center',
+        alignItems: 'center'
     }
 })
 

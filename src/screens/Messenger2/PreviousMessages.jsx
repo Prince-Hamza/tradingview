@@ -14,7 +14,6 @@ export default function PreviousMessages({ info }) {
 
 
     }, [])
-
     return (
         <Col lg={12} style={Styles.container}>
 

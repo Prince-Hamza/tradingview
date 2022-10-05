@@ -1,13 +1,17 @@
 import React from 'react'
 import { Col, Row, Card, Button } from 'react-bootstrap'
 import { Content } from '../../styles/styles'
+import axios from 'axios'
 
 export default function Overlayer() {
+
+    const payStack = () => {
+     //axios   
+    }
+
     return (
         <Col lg={12} style={Styles.Overlayer}>
             <Col lg={4} style={{ ...Styles.card, ...Content.colCentrify }}>
-
-
 
                 <Card style={{ ...Content.colTopLeft, backgroundColor: 'black' }}>
 
@@ -23,7 +27,7 @@ export default function Overlayer() {
                         <li>   chat with users to dicuss ideas   </li>
                     </ul>
                     <br />
-                    <Button onClick={() => { window.location.replace('https://buy.stripe.com/cN23eFa36diCfcI6oo') }}>
+                    <Button onClick={() => { window.location.replace('https://paystack.com/pay/yzx3sqkcr9') }}>
                         Subscribe
                     </Button>
                 </Card>
@@ -38,7 +42,8 @@ const Styles = ({
     Overlayer: {
         position: 'absolute',
         //left:'0px',
-        marginRight:'15px',
+        top:'0px',
+        marginRight: '15px',
         width: '100%',
         height: window.screen.height,
         backgroundColor: 'rgba(20,20,20,0.7)',

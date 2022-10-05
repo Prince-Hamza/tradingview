@@ -10,6 +10,7 @@ import Menubar from '../Menubar/Menubar'
 export default function Community() {
 
     const { appData, setAppData } = useContext(AppContext)
+    alert(appData.userInfo.uid)
 
     return (
         <Row lg={12} style={{ ...Content.rowLeftStart, ...Styles.dashboard }}>

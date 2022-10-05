@@ -10,7 +10,6 @@ import Menubar from '../Menubar/Menubar'
 
 export default function SelectTopic() {
 
-    const [userInfo, setUserInfo] = useState()
 
     return (
         <Row lg={12} style={Styles.AppWrapper}>

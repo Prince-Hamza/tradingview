@@ -10,6 +10,11 @@ function randomRange(min, max) {
 export class ChatSystem {
 
 
+    constructor() {
+        this.once = true
+    }
+
+
     getChatList = async (uid) => {
         var path = uid.split('.').join('_')
         var chatLinksList = await firebase.database().ref(`/users/${path}/chats`).once('value')
@@ -34,6 +39,19 @@ export class ChatSystem {
         var resp = await firebase.database().ref(`chats/${chatKey}`).once('value')
         resp.forEach((item) => { list.push(item.val()) })
         return list
+    }
+
+    onMessage = (path, fn) => {
+        var cRef = this
+        if (this.once) {
+            firebase.database().ref(path).limitToLast(1).on('child_added', (messageResp) => {
+                cRef.once = false
+                var message = messageResp.val()
+                fn(message)
+                // alert(`list : ${JSON.stringify(res.val())}`)
+                //res.forEach((item) => { list.push(item.val()) })
+            })
+        }
     }
 
 

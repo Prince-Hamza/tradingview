@@ -2,6 +2,7 @@ import firebase from 'firebase/compat/app'
 import "firebase/compat/auth"
 import sha256 from 'crypto-js/sha256'
 import Cookies from 'js-cookie'
+import axios from 'axios'
 
 export class webAuth {
 
@@ -28,14 +29,21 @@ export class webAuth {
     AnonymousLogin = async () => {
         const response = await firebase.auth().signInAnonymously();
         const Id = response.user.uid
-        console.log('Resp : ' + Id);
+        console.log('Resp : ' + Id)
         return Id
     }
 
 
     setLoginSession = async (email, password) => {
         var authSha = sha256(`${email}___${password}`)  // 3 underscores
-        await firebase.database().ref(`sessions/${authSha}`).update({ email: email, password: password })
+        try {
+            
+            await firebase.database().ref(`sessions/${authSha}`).update({ email: email, password: password })
+        } catch (ex) {
+            alert(ex)
+        }
+
+        alert('update successful')
         Cookies.set('sessionEncSha256', authSha)
         return { success: true }
     }
@@ -49,18 +57,18 @@ export class webAuth {
         return emailLogin
     }
 
+
+    additionalInfo = async (userName) => {
+        var uid = firebase.auth().currentUser.uid
+        console.log(`ai: uid : ${uid}`);
+        var userResp = await axios.get(`https://hutils.loxal.net/whois`)
+        var userInfo = userResp.data
+        await firebase.database().ref(`users/${uid}`).update({ displayName: userName ? userName : 'Anonymous', city: userInfo.city, country: userInfo.country })
+    }
+
     // need Social Login See Firebase Docs
 
 }
 
 
 
-/*
-usage 
-    const handleAuth = async () => {
-        const method = authMode === 'Login' ? auth.EmailLogin : auth.EmailSignUp
-        const Id = await method(email, pass)
-        if (Id) toast(`${authMode === 'Login' ? 'Successfully Logged In' : 'Successfully signed up'}`)
-        navigate('/dashboard')
-    }
-*/

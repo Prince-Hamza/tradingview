@@ -17,27 +17,36 @@ export default function AuthCard() {
     const { appData, setAppData } = useContext(AppContext)
 
     const [authMode, setAuthMode] = useState('Login')
+    const [userName, setUserName] = useState('')
     const [email, setEmail] = useState('')
     const [pass, setPass] = useState('')
 
     const navigate = useNavigate()
 
-    const postLogin = async (resp) => {        
+    const postLogin = async (resp) => {
         toast(`${authMode === 'Login' ? 'Successfully Logged In' : 'Successfully signed up'}`)
-        await auth.setLoginSession(email , pass)
+        await auth.setLoginSession(email, pass)
+        alert(`login session finish`)
         await setScheme()
-
+        alert(`scheme set finish`)
+        await auth.additionalInfo(userName)
+        alert(`addition info finish`);
         appData.userInfo = resp.user.providerData[0]
         setAppData(appData)
+        alert('navigate')
         navigate('/trading')
     }
 
     const handleAuth = async () => {
+        console.log(`auth starts`)
         const method = authMode === 'Login' ? auth.EmailLogin : auth.EmailSignUp
         const resp = await method(email, pass)
-
-        setTimeout(() => { if (resp.user) { postLogin(resp) } }, 1000)
-
+        console.log(`auth complete`)
+        alert(`resp :: ${JSON.stringify(resp)}`)
+        if (resp.user) {
+            alert('user found')
+            postLogin(resp)
+        }
         if (!resp.user) toast(resp.error.toString())
     }
 
@@ -54,7 +63,12 @@ export default function AuthCard() {
 
                 <Col>
 
-                    <h6> Username </h6>
+                    {authMode !== 'Login' && <h6> Username </h6>}
+                    {authMode !== <input type="text" style={Styles.input} onChange={(e) => { setUserName(e.target.value) }} />}
+
+                    <br />
+                    <br />
+                    <h6> Email </h6>
                     <input type="text" style={Styles.input} onChange={(e) => { setEmail(e.target.value) }} />
 
                     <br />
